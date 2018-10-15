@@ -1,6 +1,7 @@
 :root {
 	--bg_color: #90AFC5;
 	--text_cursor_color: #336B87;
+	--hover: #4CA3CE;
 	--fullwidth: 100%;
 }
 
@@ -10,7 +11,8 @@ html, body {
 
 .fade_in {
 	animation:1s ease 3s normal forwards 1 fadein;
-	opacity:0
+	opacity:0;
+	padding-top: 4vh;
 }
 
 ul {
@@ -49,4 +51,27 @@ ul {
 @keyframes blinking-cursor {
 	from, to { border-color: transparent }
 	50% { border-color: var(--text_cursor_color) }
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	max-width: 100%;
+	margin-top: 2rem;
+	bottom: 0;
+	text-align: center;
+}
+
+ul li {
+	display: inline;
+	font-size: 3vw;
+	color: var(--text_cursor_color);
+}
+
+#clickable_icon {
+	color: var(--text_cursor_color);
+}
+#clickable_icon:hover {
+	color: var(--hover);
+	text-decoration: none;
 }
