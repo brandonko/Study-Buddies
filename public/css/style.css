@@ -1,0 +1,77 @@
+:root {
+	--bg_color: #90AFC5;
+	--text_cursor_color: #336B87;
+	--hover: #4CA3CE;
+	--fullwidth: 100%;
+}
+
+html, body {
+	background-color: var(--bg_color);
+}
+
+.fade_in {
+	animation:1s ease 3s normal forwards 1 fadein;
+	opacity:0;
+	padding-top: 4vh;
+}
+
+ul {
+	list-style: none;
+}
+
+.btn.btn-primary.btn-lg.btn-block, .card {
+	font-family: monospace;
+}
+
+@keyframes fadein { 
+	from {opacity:0}
+	to {opacity:1}
+}
+
+.typewriter h1 {
+	font-family: monospace; /* Web-safe typewriter-like font */
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	border-right: .15em solid var(--text_cursor_color); /* The typwriter cursor */
+	white-space: nowrap; /* Keeps the content on a single line */
+	letter-spacing: .15em; /* Adjust as needed */
+	font-size: 5.3vw;
+	color: var(--text_cursor_color);
+	animation: 
+	typing 3s steps(25, end),
+	blinking-cursor 1s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+	from { width: 0 }
+	to { width: 100%}
+}
+
+/* The typewriter cursor effect */
+@keyframes blinking-cursor {
+	from, to { border-color: transparent }
+	50% { border-color: var(--text_cursor_color) }
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	max-width: 100%;
+	margin-top: 2rem;
+	bottom: 0;
+	text-align: center;
+}
+
+ul li {
+	display: inline;
+	font-size: 3vw;
+	color: var(--text_cursor_color);
+}
+
+#clickable_icon {
+	color: var(--text_cursor_color);
+}
+#clickable_icon:hover {
+	color: var(--hover);
+	text-decoration: none;
+}
