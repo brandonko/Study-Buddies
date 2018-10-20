@@ -1,11 +1,17 @@
 {
+  "name": "Study_Buddies",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
-  "name": "",
-  "version": "",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.9",
     "express": "^4.16.4",
-    "path": "^0.12.7"
+    "http-errors": "^1.7.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4",
+    "pug": "^2.0.0-beta11"
   }
 }

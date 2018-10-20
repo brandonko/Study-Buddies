@@ -29,8 +29,10 @@ app.get('/post', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/post.html'));
 }); 
 
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log('Server running at http://192.168.1.9:' + port + '/')
+const port = process.env.PORT || 3000;
+app.listen(port, function ()
+{
+ console.log(`http://localhost:${port}.`);
+//  console.log(`Server running at http://192.168.1.9:' + port + '/')
 })
 
