@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema({
   author: { type: String, default: userName },
   content: { type: String, trim: true },
   likes: { type: Number, default: 0 }
-}, 
+},
 {timestamps: true});
 const Post = mongoose.model('Post', PostSchema);
 module.exports = Post;
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
   last_name: { type: String, trim: true },
   email: { type: String, trim: true },
   password: { type: String, trim: true }
-}, 
+},
 {timestamps: true});
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
@@ -77,7 +77,7 @@ router.post('/auth', (req, res, next) =>
     {
       throw err;
     }
-    console.log("The result from db query: ", result, result.length, typeof(result.length));
+    console.log("The result from db query: ", result);
     if (result.length == 0)
     {
       console.log("Result.length is 0, thus auth is false. Nothing in DB");
@@ -144,15 +144,47 @@ router.post('/register', (req, res) =>
   });
 });
 
-/* POST request from channel page, add post to database */
-router.post('/store', function(req, res) {
+/* POST request from channel page, adds post to the database */
+router.post('/store', (req, res) =>
+{
   req.body.author = userName;
   let myData = new Post(req.body);
-  myData.save();
-  console.log("added: " + JSON.stringify(req.body) + " to mongodb");
-  res.render('channel', {title: 'Channels',
-    auth: true,
-    userName: userName})
+  myData.save()
+  .then(item =>
+  {
+    console.log("successfull add to the DB for adding posts!");
+    // let resultQuery = db.collection("posts").find();
+    // console.log(resultQuery.body);
+    // Posts.find({}, function(err, result)
+    // {
+    //   if (err)
+    //   {
+    //     throw err;
+    //   }
+    //   console.log("The result from db query: ", result.body);
+    // })
+    db.collection("posts").find({likes:0}, function(err, resFinal)
+    {
+      if (err) throw err;
+      console.log("The final result from query from db: ", resFinal);
+      db.close();
+    });
+  })
+  .catch(err =>
+  {
+    console.error("Can't save to database!");
+    res.status(400).send("Unable to save to database");
+  })
+
+  console.log("Just added the input from channel posts into db. From POST request from /store!\n", req.body);
+  res.render('channel', {
+                          title: 'Channels',
+                          auth: true,
+                          userName: userName
+                          // postData:
+                        }
+            )
+
 });
 
 module.exports = router;
