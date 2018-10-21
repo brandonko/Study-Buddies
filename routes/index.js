@@ -98,11 +98,36 @@ router.post('/auth', (req, res, next) =>
       // authentication was successfull
       console.log("Authentication was successfull!");
       userName = result[0].first_name;
+      
 
-      res.render('channel', {title: 'Channels',
-        auth: true,
-        userName: userName
-      })
+      db.collection("posts").find({likes:0}).toArray(function(err, resFinal)
+      {
+        var data = [];
+        if (err) throw err;
+        console.log("The final result from query from db: ", JSON.stringify(resFinal));
+        
+        for (var i = 0; i < resFinal.length; i++) {
+          var item = resFinal[i];
+          var tempJson = {};
+          tempJson['author'] = item['author'];
+          tempJson['likes'] = item['likes'];
+          tempJson['content'] = item['content'];
+          tempJson['title'] = item['title'];
+          data.push(tempJson);
+          console.log(tempJson);
+        }
+
+        res.render('channel', {
+          title: 'Channels',
+          auth: true,
+          userName: userName
+        })
+        db.close();
+      });
+
+      console.log("Just added the input from channel posts into db. From POST request from /store");
+      
+
     }
     else
     {
@@ -147,44 +172,27 @@ router.post('/register', (req, res) =>
 /* POST request from channel page, adds post to the database */
 router.post('/store', (req, res) =>
 {
+  var data = {};
   req.body.author = userName;
   let myData = new Post(req.body);
   myData.save()
-  .then(item =>
-  {
-    console.log("successfull add to the DB for adding posts!");
-    // let resultQuery = db.collection("posts").find();
-    // console.log(resultQuery.body);
-    // Posts.find({}, function(err, result)
-    // {
-    //   if (err)
-    //   {
-    //     throw err;
-    //   }
-    //   console.log("The result from db query: ", result.body);
-    // })
-    db.collection("posts").find({likes:0}, function(err, resFinal)
-    {
-      if (err) throw err;
-      console.log("The final result from query from db: ", resFinal);
-      db.close();
-    });
-  })
-  .catch(err =>
-  {
-    console.error("Can't save to database!");
-    res.status(400).send("Unable to save to database");
-  })
+  console.log("successfull add to the DB for adding posts!");
 
-  console.log("Just added the input from channel posts into db. From POST request from /store!\n", req.body);
+  db.collection("posts").find({likes:0}).toArray(function(err, resFinal)
+  {
+    if (err) throw err;
+    console.log("The final result from query from db: ", resFinal);
+    data = resFinal;
+    db.close();
+  });
+
+  console.log("Just added the input from channel posts into db. From POST request from /store");
   res.render('channel', {
-                          title: 'Channels',
-                          auth: true,
-                          userName: userName
-                          // postData:
-                        }
-            )
-
-});
+    title: 'Channels',
+    auth: true,
+    userName: userName,
+    postData: data
+  })
+})
 
 module.exports = router;
