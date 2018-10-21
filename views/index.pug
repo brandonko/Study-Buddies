@@ -1,5 +1,40 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  body#page-top
+    //- Navigation
+    nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+      .container
+        a.navbar-brand.js-scroll-trigger(href='#page-top') Study Buddies
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+          | Menu
+          i.fas.fa-bars
+        #navbarResponsive.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='#about') About
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='\login') Login
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='#') Signup
+    //- Header
+    header.masthead
+      .container.d-flex.h-100.align-items-center
+        .mx-auto.text-center
+          h1.mx-auto.my-0.text-uppercase Study Buddies
+          h2.text-white-50.mx-auto.mt-2.mb-5
+            | A web app for streamlining communication between students within the classroom. Join today!
+          a.btn.btn-primary.js-scroll-trigger(href='#about') Login
+    //- About Section
+    section#about.about-section.text-center
+      .container
+        .row
+          .col-lg-8.mx-auto
+            h2.text-white.mb-4 About Study Buddies
+            p.text-white-50
+              | Study Buddies was created improve the learning process for students. Study Buddies helps increase student communication providing opporotunties for students to learn from one another. With a custom custom chat room for each class, students within the same class can discuss together. Each university has access to their own unique set of chat rooms per class.
+        img.img-fluid(src='img/Study-Hack.jpg', alt='')
+    //- script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js', charset='utf-8')
