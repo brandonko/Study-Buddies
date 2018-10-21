@@ -65,29 +65,53 @@ router.get('/login', (req, res, next) =>
 });
 
 /* POST request from LOGIN page, authenticate credentials */
-router.post('/auth', (req, res) =>
+router.post('/auth', (req, res, next) =>
 {
-  var auth = true;
-  var userEmail = req.body.email;
-  var userPass = req.body.password;
-  db.collection("users").find({email : userEmail}).toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result);
-    if (result.length == 0 || result[0].password !== userPass) {
-      console.log('unsuccessful authentication');
-      res.render('login', { title: 'Study Buddies - Login',
-        cssOne: 'loginUtil.css',
-        cssTwo: 'loginMain.css'
-      });
-    } else {
-      console.log('successful authentication');
+  let auth = true;
+  let userEmail = req.body.email;
+  let userPass = req.body.password;
+  db.collection("users").find({email : userEmail}).toArray(function(err, result)
+  {
+    if (err)
+    {
+      throw err;
+    }
+    console.log("The result from db query: ", result, result.length, typeof(result.length));
+    if (result.length == 0)
+    {
+      console.log("Result.length is 0, thus auth is false. Nothing in DB");
+      auth = false;
+    }
+    else if (result[0].password !== userPass)
+    {
+      console.log("The password doesn't equal the password in DB!");
+      auth = false;
+    }
+    else
+    {
+      console.log("successfull auth");
+    }
+
+    if (auth === true)
+    {
+      // authentication was successfull
+      console.log("Authentication was successfull!");
       userName = result[0].first_name;
       res.render('channel', {title: 'Channels',
         auth: true,
         userName: userName
       })
     }
-  })
+    else
+    {
+      // bad, auth didn't work. not successfull
+
+      console.error("error when authenticating! 401 status");
+      let err = new Error('Wrong email or Password!');
+      err.status = 401;
+      return next(err);
+    }
+  });
 });
 
 /* GET request to SIGNUP form page. */
@@ -98,17 +122,25 @@ router.get('/signup', (req, res, next) =>
   });
 });
 
-/* POST request from SIGNUP page, add details into database */
+/* POST request from SIGNUP page, add details into database*/
 router.post('/register', (req, res) =>
 {
+  console.log("Req.body: \n", req.body);
   let myData = new User(req.body);
-  myData.save();
-  console.log("Just added the user into db");
-  res.render('login', { title: 'Study Buddies - Login',
-    cssOne: 'loginUtil.css',
-    cssTwo: 'loginMain.css'
+  myData.save()
+  .then(item =>
+  {
+    console.log("Just added the user into db. From POST request from /register!");
+    console.log("All information added to DB: ", item);
+    // redirecting to login page upon successfull completion of signup
+    res.render('login', { title: 'Study Buddies - Login', cssOne: 'loginUtil.css', cssTwo: 'loginMain.css' });
+  })
+  .catch(err =>
+  {
+    console.error("Can't save to database!");
+    res.status(400).send("Unable to save to database");
   });
-})
+});
 
 /* POST request from channel page, add post to database */
 router.post('/store', function(req, res) {
@@ -117,8 +149,8 @@ router.post('/store', function(req, res) {
   myData.save();
   console.log("added: " + JSON.stringify(req.body) + " to mongodb");
   res.render('channel', {title: 'Channels',
-        auth: true,
-        userName: userName})
+    auth: true,
+    userName: userName})
 });
 
 module.exports = router;

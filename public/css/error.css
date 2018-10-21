@@ -1,0 +1,28 @@
+html
+{
+  background-color: #000;
+  font-size: 12px;
+}
+
+.overallErrorPage
+{
+  margin: 0 auto;
+  background-color: #000;
+}
+
+.errorPageHead
+{
+  margin: 3em;
+  text-align: center;
+  font-size: 3em;
+  color: #fff;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.errorPageSecondHead
+{
+  text-align: center;
+  font-size: 1.6em;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+}
