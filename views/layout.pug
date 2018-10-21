@@ -3,13 +3,18 @@ html(lang='en', dir='ltr')
   head
     title #{title}
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='referrer', content='origin')
+    meta(name='description', content="Study Buddies is a platform for communication for students.")
+    meta(name='keywords', content='Study Buddies, Chat, University, Class, Help')
+    meta(name='author', content='Brandon, Raymond, Ronan')
     link(href='https://fonts.googleapis.com/css?family=Nunito:200,300,400|Roboto:300,400,500|Titillium+Web:200,300,400|Ubuntu:300,400,500', rel='stylesheet')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    - if (typeof(cssTwo) !== 'undefined'){
+      link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')        
+      link(rel='stylesheet', href=`/css/${cssTwo}`)  
+    -}
     link(rel='stylesheet', href=`/css/${cssOne}`)
-    link(rel='stylesheet', href=`/css/${cssTwo}`)  
-    //- link(rel='stylesheet', href='/css/style.css')
-    //- button(type='button' class=`btn btn-${btnType} btn-${btnSize}`)
   body
     block content
       

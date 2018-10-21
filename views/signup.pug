@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .page-wrapper.bg-gra-02.p-t-130.p-b-100.font-poppins
+    .wrapper.wrapper--w680
+      .card.card-4
+        .card-body
+          h2.title Sign Up for Study Buddies
+          form(method='POST')
+            .row.row-space
+              .col-2
+                .input-group
+                  label.label first name
+                  input.input--style-4(type='text', name='first_name', required='')
+              .col-2
+                .input-group
+                  label.label last name
+                  input.input--style-4(type='text', name='last_name', required='')
+            .row.row-space
+              .col-2
+                .input-group
+                  label.label Email
+                  input.input--style-4(type='email', name='email', required='')
+              .col-2
+                .input-group
+                  label.label University
+                  input.input--style-4(type='text', name='email', required='')
+            .p-t-15
+              button.btn.btn--radius-2.btn--blue(type='submit') Submit
+  //-  script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+  //-  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+  //-  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+  //-  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js', charset='utf-8', type='text/javascript')

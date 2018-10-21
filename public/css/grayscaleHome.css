@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
  */
 
+ html
+ {
+   /* background-color: #0062cc; */
+ }
+
 #mainNav {
   min-height: 56px;
   background-color: #fff;
