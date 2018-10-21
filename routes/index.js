@@ -98,33 +98,11 @@ router.post('/auth', (req, res, next) =>
       // authentication was successfull
       console.log("Authentication was successfull!");
       userName = result[0].first_name;
-      
-
-      db.collection("posts").find({likes:0}).toArray(function(err, resFinal)
-      {
-        var data = [];
-        if (err) throw err;
-        console.log("The final result from query from db: ", JSON.stringify(resFinal));
-        
-        for (var i = 0; i < resFinal.length; i++) {
-          var item = resFinal[i];
-          var tempJson = {};
-          tempJson['author'] = item['author'];
-          tempJson['likes'] = item['likes'];
-          tempJson['content'] = item['content'];
-          tempJson['title'] = item['title'];
-          data.push(tempJson);
-          console.log(tempJson);
-        }
-
         res.render('channel', {
           title: 'Channels',
           auth: true,
           userName: userName
         })
-        db.close();
-      });
-
       console.log("Just added the input from channel posts into db. From POST request from /store");
       
 

@@ -94,6 +94,12 @@ html(lang='en', dir='ltr')
       lButton.innerHTML = ((parseInt((lButton.innerHTML)[0])) + 1) + "👍";
       lButton.disabled = true;
       }
+      function liked2()
+      {
+      var lButton = document.getElementById("thumbs2");
+      lButton.innerHTML = ((parseInt((lButton.innerHTML)[0])) + 1) + "👍";
+      lButton.disabled = true;
+      }
       function clearChat()
       {
       document.cookie = "chat=;";
@@ -182,6 +188,13 @@ html(lang='en', dir='ltr')
                 p.card-text
                   | We will be reviewing for the next midterm (Monday 10/22) in the CSE Lab06. Come and ask questions! Bring the practice midterm, we will be going over it as well.
                 button#thumbs.btn.btn-outline-dark(onclick='liked()') 3👍
+            .card(style='width: 100%; margin-top: 10px; background-color: #fcfcfc')
+              .card-body
+                h5.card-title Office Hours from 3-6pm @ 10/24!!!
+                h6.card-subtitle.mb-2.text-muted Posted by Brandon Ko
+                p.card-text
+                  | Don't forget about office hours! TA's will be helping out with homework and review for the midterm. Good luck with your studies!
+                button#thumbs2.btn.btn-outline-dark(onclick='liked2()') 6👍
           // submit a post
           form(action='/store', method='POST')
             .card(style='width: 100%; margin-top: 10px; background-color: #fcfcfc')
