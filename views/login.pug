@@ -1,6 +1,20 @@
 extends layout
 
 block content
+  body#page-top
+    //- Navigation
+    nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+      .container
+        a.navbar-brand.js-scroll-trigger(href='/') Study Buddies
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+          | Menu
+          i.fas.fa-bars
+        #navbarResponsive.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='/login') Login
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='/signup') Signup
     .limiter
       .container-login100
         .wrap-login100.p-t-50.p-b-90

@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  body#page-top
   .page-wrapper.bg-gra-02.p-t-130.p-b-100.font-poppins
     .wrapper.wrapper--w680
       .card.card-4
@@ -27,6 +28,6 @@ block content
                   input.input--style-4(type='password', name='password', required='')
             .p-t-15
               button.btn.btn--radius-2.btn--blue(type='submit') Submit
-              button.btn.btn--radius-2.btn--blue(href='\login', style={margin: '0em 0em 0em 1em', float: 'right'}) Login Instead
+              a.nav-link(href='/login', style="float: right; text-decoration: none; font-size: 35px; font-color: blue") Return
             //- .p-t-15
             //-   button.btn.btn--radius-2.btn--blue(href='\login') Login
