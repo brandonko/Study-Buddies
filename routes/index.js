@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /* GET request to HOME page. */
-router.get('/', (req, res, next) =>
+router.get('/', (req, res) =>
 {
   res.render('index', { title: 'Study Buddies - Home',
                         cssOne: 'grayscaleHome.css',
@@ -11,7 +11,7 @@ router.get('/', (req, res, next) =>
 });
 
 /* GET request to LOGIN form page. */
-router.get('/login', (req, res, next) =>
+router.get('/login', (req, res) =>
 {
   res.render('login', { title: 'Study Buddies - Login',
                         cssOne: 'loginUtil.css',
@@ -20,7 +20,7 @@ router.get('/login', (req, res, next) =>
 });
 
 /* GET request to SIGNUP form page. */
-router.get('/signup', (req, res, next) =>
+router.get('/signup', (req, res) =>
 {
   res.render('signup', { title: 'Study Buddies - SignUp',
                         cssOne: 'formSignUp.css'
