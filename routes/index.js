@@ -19,13 +19,12 @@ router.get('/login', (req, res, next) =>
                       });
 });
 
+/* GET request to SIGNUP form page. */
 router.get('/signup', (req, res, next) =>
 {
   res.render('signup', { title: 'Study Buddies - SignUp',
                         cssOne: 'formSignUp.css'
                       });
 });
-
-// formSignUp.css
 
 module.exports = router;
