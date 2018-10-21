@@ -53,11 +53,11 @@ html(lang='en', dir='ltr')
       $(function ()
       {
       // NEED TO FIND ACTUAL NAME
-      var name = "#{userName}" + ": ";
+      var name = "#{userName}" + ",";
       var socket = io();
       $('#chatbox').submit(function()
       {
-      socket.emit('chat message', $('#m').val());
+      socket.emit('chat message', name + $('#m').val());
       $('#m').val('');
       return false;
       });

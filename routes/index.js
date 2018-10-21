@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const fs = require('fs');
 var userName = "";
 
 router.use(bodyParser.json());
@@ -97,6 +98,7 @@ router.post('/auth', (req, res, next) =>
       // authentication was successfull
       console.log("Authentication was successfull!");
       userName = result[0].first_name;
+
       res.render('channel', {title: 'Channels',
         auth: true,
         userName: userName

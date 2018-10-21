@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const app = express();
 const helmet = require('helmet');
+const fs = require('fs');
+var people = {};
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -41,27 +43,26 @@ app.use(function(err, req, res, next)
 
   res.status(err.status || 500);
   res.render('error', {
-                        message: err.message,
-                        title: `Error: ${err.status}`,
-                        cssOne: 'error.css',
-                        cssTwo: 'error.css',
-                        error: {}
-                      }
-            );
+    message: err.message,
+    title: `Error: ${err.status}`,
+    cssOne: 'error.css',
+    cssTwo: 'error.css',
+    error: {}
+  }
+  );
 });
 
 
 // setup for socket.io
 io.on('connection', function(socket){
-	console.log('new connection made.');
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
-		io.emit('chat message', msg);
-	});
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+    io.emit('chat message', msg);
+  });
 });
 
 
 http.listen(8080, () =>
 {
-   console.log(`Listening port 8080! http://localhost:8080`);
+ console.log(`Listening port 8080! http://localhost:8080`);
 });
