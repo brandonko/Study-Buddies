@@ -132,9 +132,53 @@ html(lang='en', dir='ltr')
                   | We will be reviewing for the next midterm (Monday 10/22) in the CSE Lab06. Come and ask questions! Bring the practice midterm, we will be going over it as well.
                 button#thumbs.btn.btn-outline-dark(onclick='liked()') 3👍
           script.
-            function like()
-            {
-            $('#test').innerHTML = "fawefewf";
+            window.onload = function () {
+              //var data = "#{postData}";
+              var data = [{title: "bigtitle",author: "ray",content: "cont", likes: 0}];
+              console.log(data);
+              for (var i = 0; i < data.length; i++) {
+                var post = data[i];
+                console.log(post);
+                var title = post.title;
+                var author = post.author;
+                var content = post.content;
+                var likes = post.likes;
+                var bodyList = document.getElementById('postList');
+
+                var contentDOM = document.createElement("p");
+                contentDOM.innerHTML = content;
+                contentDOM.classList.add("card-text");
+
+                var subtitleDOM = document.createElement("h6");
+                subtitleDOM.innerHTML = author;
+                subtitleDOM.classList.add("card-subtitle");
+                subtitleDOM.classList.add("mb-2");
+                subtitleDOM.classList.add("text-muted");
+
+                var titleDOM = document.createElement("h5");
+                titleDOM.innerHTML = title;
+                titleDOM.classList.add("card-title");
+
+                var likes = document.createElement("button");
+                likes.classList.add("btn");
+                likes.classList.add("btn-outline-dark");
+                likes.innerHTML = "3👍";
+
+                var cardBodyDOM = document.createElement("div");
+                cardBodyDOM.classList.add("card-body");
+
+                var cardDOM = document.createElement("div");
+                cardDOM.classList.add("card");
+                cardDOM.style = 'width: 100%; margin-top: 10px; background-color: #fcfcfc';
+
+                cardBodyDOM.appendChild(titleDOM);
+                cardBodyDOM.appendChild(subtitleDOM);
+                cardBodyDOM.appendChild(contentDOM);
+                cardBodyDOM.appendChild(likes);
+                
+                cardDOM.appendChild(cardBodyDOM);
+                bodyList.appendChild(cardDOM);
+              }
             }
           // submit a post
           form(action='/store', method='POST')
