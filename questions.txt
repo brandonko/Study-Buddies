@@ -1,0 +1,14 @@
+## Inspiration
+
+## What it does
+
+## How I built it
+We use Mongoose DB to store the posts for the blogs and use
+## Challenges I ran into
+
+## Accomplishments that I'm proud of
+I am proud of our somewhat working app and how much progress we have made in the last 20 or so hours.
+## What I learned
+
+## What's next for Study Buddies
+Implement the Blog function and better chat functionality.
