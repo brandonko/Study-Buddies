@@ -7,7 +7,6 @@
 * MongoDB
 * JS
 * CSS
-* Gulp.js
 * Pug
 * jQuery
 * Bootstrap
