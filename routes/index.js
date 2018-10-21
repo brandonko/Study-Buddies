@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const userName = "Ronan";
+var userName = "";
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
@@ -46,6 +46,15 @@ router.get('/', (req, res, next) =>
   });
 });
 
+/* POST request from channel to log out */
+router.post('/', (req, res, next) =>
+{
+  res.render('index', { title: 'Study Buddies - Home',
+    cssOne: 'grayscaleHome.css',
+    cssTwo: 'twoHome.css'
+  });
+});
+
 /* GET request to LOGIN form page. */
 router.get('/login', (req, res, next) =>
 {
@@ -64,18 +73,21 @@ router.post('/auth', (req, res) =>
   db.collection("users").find({email : userEmail}).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
-    if (result.length == 0) auth = false;
-    else if (result[0].password !== userPass) auth = false;
-    else console.log("successfull auth");
-  });
-  if (auth) {
-
-  } else {
-    res.render('login', { title: 'Study Buddies - Login',
-      cssOne: 'loginUtil.css',
-      cssTwo: 'loginMain.css'
-    });
-  }
+    if (result.length == 0 || result[0].password !== userPass) {
+      console.log('unsuccessful authentication');
+      res.render('login', { title: 'Study Buddies - Login',
+        cssOne: 'loginUtil.css',
+        cssTwo: 'loginMain.css'
+      });
+    } else {
+      console.log('successful authentication');
+      userName = result[0].first_name;
+      res.render('channel', {title: 'Channels',
+        auth: true,
+        userName: userName
+      })
+    }
+  })
 });
 
 /* GET request to SIGNUP form page. */
@@ -97,5 +109,16 @@ router.post('/register', (req, res) =>
     cssTwo: 'loginMain.css'
   });
 })
+
+/* POST request from channel page, add post to database */
+router.post('/store', function(req, res) {
+  req.body.author = userName;
+  let myData = new Post(req.body);
+  myData.save();
+  console.log("added: " + JSON.stringify(req.body) + " to mongodb");
+  res.render('channel', {title: 'Channels',
+        auth: true,
+        userName: userName})
+});
 
 module.exports = router;

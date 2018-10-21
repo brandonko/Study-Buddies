@@ -6,6 +6,9 @@ const logger = require('morgan');
 const app = express();
 const helmet = require('helmet');
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 app.use(helmet());
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 
@@ -39,7 +42,18 @@ app.use(function(err, req, res, next)
   res.render('error');
 });
 
-app.listen(8080, () =>
+
+// setup for socket.io
+io.on('connection', function(socket){
+	console.log('new connection made.');
+	socket.on('chat message', function(msg){
+		console.log('message: ' + msg);
+		io.emit('chat message', msg);
+	});
+});
+
+
+http.listen(8080, () =>
 {
    console.log(`Listening port 8080! http://localhost:8080`);
 });
