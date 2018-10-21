@@ -65,12 +65,13 @@ html(lang='en', dir='ltr')
       {
       if (msg.length != 0)
       {
+      var two = msg.split(",");
       var lis = document.createElement("li");
       lis.classList.add("list-group-item");
       var bol = document.createElement("b");
-      bol.innerHTML = name;
+      bol.innerHTML = two[0]+": ";
       lis.appendChild(bol);
-      lis.appendChild(document.createTextNode(msg));
+      lis.appendChild(document.createTextNode(two[1]));
       document.getElementById('messages').appendChild(lis);
       var cook = "chat="+document.getElementById("messages").innerHTML+";";
       document.cookie = cook;
