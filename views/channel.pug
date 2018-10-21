@@ -53,7 +53,7 @@ html(lang='en', dir='ltr')
       $(function ()
       {
       // NEED TO FIND ACTUAL NAME
-      var name = "#{userName}" + "\,";
+      var name = "#{userName}" + "|";
       var socket = io();
       $('#chatbox').submit(function()
       {
@@ -63,9 +63,9 @@ html(lang='en', dir='ltr')
       });
       socket.on('chat message', function(msg)
       {
-      if (msg.length != 0)
+      var two = msg.split("|");
+      if (two[1].length > 0)
       {
-      var two = msg.split("\,");
       var lis = document.createElement("li");
       lis.classList.add("list-group-item");
       var bol = document.createElement("b");
