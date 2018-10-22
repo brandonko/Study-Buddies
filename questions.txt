@@ -1,14 +1,3 @@
-## Inspiration
-
-## What it does
-
-## How I built it
-We use Mongoose DB to store the posts for the blogs and use
-## Challenges I ran into
-
-## Accomplishments that I'm proud of
-I am proud of our somewhat working app and how much progress we have made in the last 20 or so hours.
-## What I learned
-
-## What's next for Study Buddies
-Implement the Blog function and better chat functionality.
+Our inspiration for Study Buddies came from our need to have a free platform for students to communicate with one another. There is not free platform that offers a free chatting service integrated with blog posting capabilities.
+Study Buddies is accessible for students across the world from all universities. Students can signup, choose the university they attend, and then choose the class specific chatroom/blog posting room. This application is a Node.js based application that utilizes Express as the Node framework. The web app uses MongoDB for data storage with server side rendering using Pug/Jade. The whole application is bootstrapped and utilizes CDNs.
+Our team worked very well together where each person had strengths that complemented each others.
